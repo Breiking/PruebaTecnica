@@ -52,4 +52,5 @@ public class EstadoImplService implements IEstadoService {
     public boolean existsById(Integer id){
         return estadoDao.existsById(id);
     }
+
 }

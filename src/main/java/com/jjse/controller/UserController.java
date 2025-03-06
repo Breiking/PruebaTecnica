@@ -14,6 +14,10 @@ import com.jjse.model.entity.User;
 import com.jjse.model.pyload.MessageResponse;
 import com.jjse.service.IUserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +30,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "Users", description = "Endpoints para gestionar los Usuarios")
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
     @GetMapping("")
+    @Operation(summary = "Listar todos los Usuarios", description = "")
     public ResponseEntity<?> showAll() {
         
         List<User> getList = userService.listAll();
@@ -54,6 +60,7 @@ public class UserController {
     }
 
     @PostMapping("")
+    @Operation(summary = "Registrar un nuevo usuario", description = "el nombre no debe ser menor a 5 caracteres")
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto){
         User userSave = null;
         try {
@@ -87,6 +94,7 @@ public class UserController {
         }
     }
     @PutMapping("/{id}")
+    @Operation(summary = "Modificar un usuario", description = "el nombre no debe ser menor a 5 caracteres")
         public ResponseEntity<?> updateUser(@RequestBody UserDto userDto, @PathVariable Integer id){
             User userUpdate = null;
             try {
@@ -124,6 +132,7 @@ public class UserController {
         }
 
         @DeleteMapping("/{id}")
+        @Operation(summary = "Eliminar un usuario", description = "El usuario se eliminar unicamente si no tiene ninguna tarea asignada, en proceso o terminada")
         public ResponseEntity<?> deleteeUser(@PathVariable Integer id){
         try {
 
@@ -144,6 +153,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar un usuario", description = "")
     public ResponseEntity<?> showByid(@PathVariable Integer id){
         User user = userService.findById(id);
 

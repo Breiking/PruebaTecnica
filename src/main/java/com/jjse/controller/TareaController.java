@@ -14,24 +14,31 @@ import com.jjse.model.entity.Tarea;
 import com.jjse.model.pyload.MessageResponse;
 import com.jjse.service.ITareaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
 
 @RestController
 @RequestMapping("/taks")
+@Tag(name = "Tareas", description = "Endpoints para gestionar tareas")
 public class TareaController {
 
     @Autowired
     private ITareaService tareaService;
 
     @GetMapping("")
+    @Operation(summary = "Listar todas las tareas", description = "")
     public ResponseEntity<?> showAll(){
         
         List<Tarea> getList = tareaService.listAll();
@@ -54,6 +61,7 @@ public class TareaController {
     }
 
     @PostMapping("")
+    @Operation(summary = "Registrar una nueva tarea", description = "Guarda una tarea en la base de datos, el titulo no debe ser menor a 10 caracteres")
     public ResponseEntity<?> registerTarea(@RequestBody TareaDto tareaDto) {
         Tarea tareaSave = null;
 
@@ -66,8 +74,8 @@ public class TareaController {
                             .id(tareaSave.getId())
                             .titulo(tareaSave.getTitulo())
                             .descripcion(tareaSave.getDescripcion())
-                            .fk_estado(tareaSave.getEstado().getId())
-                            .fk_user(tareaSave.getUser().getId())
+                            .fk_estado(tareaSave.getEstado())
+                            .fk_user(tareaSave.getUser())
                             .build())
                         .build(), 
                     HttpStatus.CREATED);
@@ -82,6 +90,7 @@ public class TareaController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Modificar una tarea", description = "Guarda los cambios, el titulo no debe ser menor a 10 caracteres")
     public ResponseEntity<?> updateTarea(@PathVariable Integer id, @RequestBody TareaDto tareaDto){
 
         Tarea tareaUpdate = null;
@@ -98,8 +107,8 @@ public class TareaController {
                                         .id(tareaUpdate.getId())
                                         .titulo(tareaUpdate.getTitulo())
                                         .descripcion(tareaUpdate.getDescripcion())
-                                        .fk_user(tareaUpdate.getUser().getId())
-                                        .fk_estado(tareaUpdate.getEstado().getId())
+                                        .fk_user(tareaUpdate.getUser())
+                                        .fk_estado(tareaUpdate.getEstado())
                                         .build())
                                     .build(),
                                 HttpStatus.CREATED);
@@ -125,6 +134,7 @@ public class TareaController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar una tarea", description = "")
     public ResponseEntity<?> deleteTarea(@PathVariable Integer id){
 
         try {
@@ -144,6 +154,7 @@ public class TareaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar una tarea en especifico", description = "el dato a ingresar debe ser el id de la tarea")
     public ResponseEntity<?> showByid(@PathVariable Integer id) {
         
         Tarea tarea = tareaService.findById(id);
@@ -164,14 +175,35 @@ public class TareaController {
                                     .id(tarea.getId())
                                     .titulo(tarea.getTitulo())
                                     .descripcion(tarea.getDescripcion())
-                                    .fk_user(tarea.getUser().getId())
-                                    .fk_estado(tarea.getEstado().getId())
+                                    .fk_user(tarea.getUser())
+                                    .fk_estado(tarea.getEstado())
                                     .build())
                                 .build(),
             HttpStatus.OK);
 
     }
     
+    @GetMapping("/estado/{id}")
+    @Operation(summary = "Buscar las tareas con estado en especifico", description = "se debe enviar el id del estado que desea filtrar")
+    public ResponseEntity<?> tareasByEstado(@PathVariable Integer id) {
+        List<Tarea> tareas = tareaService.findByEstadoId(id);
+
+        if (tareas.isEmpty()) {
+            return new ResponseEntity<>(
+                MessageResponse.builder()
+                            .message("No hay tareas con ese estado")
+                            .object(null)
+                            .build(),
+                HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(
+            MessageResponse.builder()
+                        .message("Tareas encontradas")
+                        .object(tareas)
+                        .build(),
+            HttpStatus.OK);
+    }
     
 
 }

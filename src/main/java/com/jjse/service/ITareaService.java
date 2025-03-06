@@ -17,4 +17,5 @@ public interface ITareaService {
 
     boolean existsById(Integer id);
     
+    List<Tarea> findByEstadoId(Integer estadoId);
 }

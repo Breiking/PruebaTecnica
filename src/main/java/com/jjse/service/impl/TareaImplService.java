@@ -35,19 +35,13 @@ public class TareaImplService implements ITareaService {
     @Transactional
     @Override
     public Tarea save(TareaDto tareaDto){
-
-        User user = userDao.findById(tareaDto.getFk_user())
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        Estado estado = estadoDao.findById(tareaDto.getFk_estado())
-            .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
-
+        
         Tarea tarea = Tarea.builder()
                     .id(tareaDto.getId())
                     .titulo(tareaDto.getTitulo())
                     .descripcion(tareaDto.getDescripcion())
-                    .user(user)
-                    .estado(estado)
+                    .user(tareaDto.getFk_user())
+                    .estado(tareaDto.getFk_estado())
                     .build();
         return tareaDao.save(tarea);
     }
@@ -69,4 +63,8 @@ public class TareaImplService implements ITareaService {
         return tareaDao.existsById(id);
     }
 
+    @Override
+    public List<Tarea> findByEstadoId(Integer estadoId) {
+        return tareaDao.findByEstadoId(estadoId);
+    }
 }
