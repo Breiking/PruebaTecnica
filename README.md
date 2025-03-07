@@ -4,9 +4,9 @@
 
 Para que los links funcionen el proyecto debe estar corriendo
 
-La Api tiene una breve descriocion de los Json en la documentacion de [Swagger](http://localhost:8080/Gestion/api/v1/swagger-ui/index.html)
+La Api tiene una breve descripcion de los Json en la documentacion de [Swagger](http://localhost:8080/Gestion/api/v1/swagger-ui/index.html) este link lleva directamente a la documentacion de Swagger
 
-Link de la api, a este link se le añaden los endpoints de que aparecen en Swagger [Api](http://localhost:8080/Gestion/api/v1/)
+Link de la api, a este link se le deben añadir los endpoints de que aparecen en Swagger [Api](http://localhost:8080/Gestion/api/v1/)
 
 ### Json en caso de querer usar PostMan o otra herramienta para el uso del API
 
