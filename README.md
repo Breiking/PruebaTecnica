@@ -1,23 +1,56 @@
 # Getting Started
 
 ### Reference Documentation
+
+Para que los links funcionen el proyecto debe estar corriendo
+
 La Api tiene una breve descriocion de los Json en la documentacion de [Swagger](http://localhost:8080/Gestion/api/v1/swagger-ui/index.html)
 
 Link de la api, a este link se le añaden los endpoints de que aparecen en Swagger [Api](http://localhost:8080/Gestion/api/v1/)
 
-### Guides
-The following guides illustrate how to use some features concretely:
+### Json en caso de querer usar PostMan o otra herramienta para el uso del API
 
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+#### Json para tareas
 
-### Maven Parent overrides
+para crear una nueva tarea con el estado pendiente o Sin asignar el Json es: 
+{
+  "titulo": "string",
+  "descripcion": "string"
+}
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+en caso de crear una tarea y querer asignar un usario y cambiar el estado por defecto de la tarea o modificar una tarea ya existente, el Json seria 
+{
+  "titulo": "string",
+  "descripcion": "string",
+  "fk_user": {
+    "id": 0
+  },
+  "fk_estado": {
+    "id": 0
+  }
+}
 
+#### Json para Users
+
+el Json es el mismo tanto para crear como para actualizar un usuario 
+{
+  "nombre": "string",
+  "email": "string"
+}
+
+#### Json para Estados
+
+el Json es el mismo tanto para crear como para actualizar un usuario 
+{
+  "nombre": "string",
+  "descripcion": "string"
+}
+
+### Gestion de errores
+
+Los errores mas comunes se ven reflejadoes en el response, otros como las validaciones se ven reflejados unicamente en la consola
+
+
+### Base de datos
+
+el archivo -sql con la base de datos ira dentro del archivo .rar esta debera tener el nombre gestiontareas, esta ya tendra 4-5 datos dentro de cada tabla para poder realizar las pruebas

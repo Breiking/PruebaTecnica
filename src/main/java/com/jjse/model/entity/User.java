@@ -41,7 +41,9 @@ public class User implements Serializable {
     @Size(max = 30, message = "El título no puede tener más de 30 caracteres")
     @Column(name = "nombre")
     private String nombre;
-
+    
+    @NotBlank(message = "El email es obligatorio")
+    @Size(max = 70, min = 10, message = "El email debe ser menor a 70 caracteres y mayor a 10 caracteres")
     @Column(name = "email")
     private String email;
 

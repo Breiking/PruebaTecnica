@@ -15,6 +15,7 @@ import lombok.ToString;
 @Builder
 public class EstadoDto implements Serializable {
 
+    @JsonIgnore
     private int id;
     
     private String nombre;

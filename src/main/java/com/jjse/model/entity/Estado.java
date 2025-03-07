@@ -19,6 +19,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,9 +41,13 @@ public class Estado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(max = 60, min = 10, message = "El nombre debe tener mas de 10 caracteres y menos de 60")
     @Column(name = "nombre")
     private String nombre;
 
+    @NotBlank(message = "La Descripcion es obligatorio")
+    @Size(max = 200, min = 10, message = "La descripcion debe tener mas de 10 caracteres y menos de 200")
     @Column(name = "descripcion")
     private String descripcion;
 

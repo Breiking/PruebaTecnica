@@ -14,6 +14,7 @@ import lombok.ToString;
 @Builder
 public class UserDto implements Serializable {
 
+    @JsonIgnore
     private Integer id;
 
     private String nombre;
