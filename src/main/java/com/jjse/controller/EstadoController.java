@@ -54,7 +54,7 @@ public class EstadoController {
                             HttpStatus.OK);
     }
     
-    @PostMapping()
+    @PostMapping("")
     @Operation(summary = "Crear un estado nuevo", description = "Siguiendo el json de ejemplo puede crear un nuevo estado para las tareas")
     public ResponseEntity<?> registrarEstado(@RequestBody EstadoDto estadoDto) {
         Estado estadoSave = null;

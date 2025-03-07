@@ -49,21 +49,18 @@ public class Tarea implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "fk_user")
-    @JsonManagedReference
     @JsonIgnoreProperties({"nombre", "email", "tareas"})
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "fk_estado")
-    @JsonManagedReference
     @JsonIgnoreProperties({"nombre", "descripcion", "tareas"})
     private Estado estado;
 
     @PrePersist
     public void prePersist() {
         if (this.estado == null) {
-            this.estado = new Estado();
-            this.estado.setId(1); // Asigna el ID del estado por defecto
+            this.estado = Estado.builder().id(1).build(); // Solo asigna la referencia sin crear objeto nuevo
         }
     }
 }

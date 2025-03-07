@@ -46,7 +46,6 @@ public class Estado implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @NotBlank(message = "La Descripcion es obligatorio")
     @Size(max = 200, min = 10, message = "La descripcion debe tener mas de 10 caracteres y menos de 200")
     @Column(name = "descripcion")
     private String descripcion;

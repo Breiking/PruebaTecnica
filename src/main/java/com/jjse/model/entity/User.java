@@ -37,7 +37,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "El título es obligatorio")
+    @NotBlank(message = "El nombre es obligatorio")
     @Size(max = 30, message = "El título no puede tener más de 30 caracteres")
     @Column(name = "nombre")
     private String nombre;
@@ -49,6 +49,5 @@ public class User implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
     private List<Tarea> tareas;
 }
