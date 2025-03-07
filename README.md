@@ -53,4 +53,6 @@ Los errores mas comunes se ven reflejadoes en el response, otros como las valida
 
 ### Base de datos
 
-el archivo -sql con la base de datos ira dentro del archivo .rar esta debera tener el nombre gestiontareas, esta ya tendra 4-5 datos dentro de cada tabla para poder realizar las pruebas
+Descargar la base de datos [Descargar gestiontareas.sql](https://github.com/Breiking/PruebaTecnica/releases/download/v1.0.0/gestiontareas.sql)
+
+En caos de que el link anterior no sirva, el archivo .sql con la base datos ira dentro del archivo .rar que le compartire por el Teams esta debera tener el nombre gestiontareas, esta ya tendra 4-5 datos dentro de cada tabla para poder realizar las pruebas
