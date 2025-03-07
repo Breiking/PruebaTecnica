@@ -14,6 +14,9 @@ import com.jjse.model.entity.Estado;
 import com.jjse.model.pyload.MessageResponse;
 import com.jjse.service.IEstadoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +29,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/estados")
+@Tag(name = "Estados", description = "Endpoints para gestionar los Estados")
 public class EstadoController {
     @Autowired
     private IEstadoService estadoService;
 
     @GetMapping()
+    @Operation(summary = "Listar todos los Estados", description = "")
     public ResponseEntity<?> showAll() {
         List<Estado> getList = estadoService.listAll();
         if (getList.size() <= 0) {
@@ -50,6 +55,7 @@ public class EstadoController {
     }
     
     @PostMapping()
+    @Operation(summary = "Crear un estado nuevo", description = "Siguiendo el json de ejemplo puede crear un nuevo estado para las tareas")
     public ResponseEntity<?> registrarEstado(@RequestBody EstadoDto estadoDto) {
         Estado estadoSave = null;
         try {
@@ -76,6 +82,7 @@ public class EstadoController {
     }
     
     @PutMapping("/{id}")
+    @Operation(summary = "Modificar un estado", description = "")
     public ResponseEntity<?> updatePermiso(@PathVariable Integer id, @RequestBody EstadoDto estadoDto) {
         Estado estadoUpdate = null;
 
@@ -113,6 +120,7 @@ public class EstadoController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar un estado", description = "Si hay tareas con este estado, este no podra ser eliminado")
     public ResponseEntity<?> deleteEestado(@PathVariable Integer id){
         try {
             Estado estadoDelete = estadoService.findById(id);

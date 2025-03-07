@@ -61,7 +61,7 @@ public class TareaController {
     }
 
     @PostMapping("")
-    @Operation(summary = "Registrar una nueva tarea", description = "Guarda una tarea en la base de datos, el titulo no debe ser menor a 10 caracteres")
+    @Operation(summary = "Registrar una nueva tarea", description = "Guarda una tarea en la base de datos, el titulo no debe ser menor a 10 caracteres, si no desea asignar la tarea a ningun usuario o dejar la tarea con estado Pendiente, puede eliminar del Json las dos claver, fk_user y fk_estado, dejando unicamente titulo y descripcion")
     public ResponseEntity<?> registerTarea(@RequestBody TareaDto tareaDto) {
         Tarea tareaSave = null;
 
@@ -90,7 +90,7 @@ public class TareaController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Modificar una tarea", description = "Guarda los cambios, el titulo no debe ser menor a 10 caracteres")
+    @Operation(summary = "Modificar una tarea", description = "Guarda los cambios, el titulo no debe ser menor a 10 caracteres, si desea asignar la tarea aun usuario recuerde poder el id del usuario y cambiar el id del estado a En progreso(id 2)")
     public ResponseEntity<?> updateTarea(@PathVariable Integer id, @RequestBody TareaDto tareaDto){
 
         Tarea tareaUpdate = null;

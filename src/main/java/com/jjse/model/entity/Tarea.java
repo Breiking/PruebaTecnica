@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -57,4 +58,12 @@ public class Tarea implements Serializable {
     @JsonManagedReference
     @JsonIgnoreProperties({"nombre", "descripcion", "tareas"})
     private Estado estado;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.estado == null) {
+            this.estado = new Estado();
+            this.estado.setId(1); // Asigna el ID del estado por defecto
+        }
+    }
 }
